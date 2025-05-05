@@ -2,22 +2,22 @@
 //Basic data types
 //string
 //implicit type define 
-var firstName = 'riyal';
+let firstName = 'riyal';
 //explicit type define
-var secondName = 'rahman';
-var roll = 123;
+let secondName = 'rahman';
+let roll = 123;
 //boolean
-var isAdmin = true;
+let isAdmin = true;
 //undefined
-var x = undefined;
+let x = undefined;
 // null
-var y = null;
+let y = null;
 //here the the d varible typescript compiler will assume it can be any type cause we are not define here
-var d;
+let d;
 //non premitive data types
 //array
-var friends = ['hasan', 'ali'];
-var randomRoll = [1, 3];
+let friends = ['hasan', 'ali'];
+let randomRoll = [1, 3];
 //tuple --> array --> order --> type of values
-var coordinates = [1, 5];
-var ageName = [25, 'riyal', true];
+let coordinates = [1, 5];
+let ageName = [25, 'riyal', true];

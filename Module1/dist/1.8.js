@@ -2,7 +2,7 @@
 {
     //Destructuring in TypeScript
     //Object Destructuring
-    var user_1 = {
+    const user = {
         id: 234,
         name: {
             firstName: "Ashikur",
@@ -11,12 +11,15 @@
         contactNo: 1234566,
         address: 'Baridhara'
     };
-    var 
+    const { 
     //contactNo: string,
     //when we are going to destructure this thing we cannot specify its type here, 
     //simply we can alias here, that means
-    phoneNum = user_1.contactNo, fName = user_1.name.firstName;
+    contactNo: phoneNum, 
+    //the contactNo i will be get this thing after destructuring it will be phoneNum.
+    //When you are destructuting you can only change its name
+    name: { firstName: fName } } = user;
     //Array Destructuring
-    var myFriends = ['Gopu', 'Samir', 'Tanvir', 'Mithun', 'Chonu'];
-    var bestFriend = myFriends[2], rest = myFriends.slice(3);
+    const myFriends = ['Gopu', 'Samir', 'Tanvir', 'Mithun', 'Chonu'];
+    const [, , bestFriend, ...rest] = myFriends;
 }
