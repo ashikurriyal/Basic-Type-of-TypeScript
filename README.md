@@ -40,16 +40,5 @@ ts-node-dev --respawn --transpile-only src/index.ts
 
 This guide walks you through the core of TypeScript, starting with primitive and non‑primitive data types, then showing how to destructure arrays and objects. You’ll see how to write functions with default parameters, arrow syntax, and object methods, and learn about special types like `nullable`, `unknown`, and `never`. Moving on, it covers object modeling with type aliases, `readonly` and optional properties, demonstrates spread/rest operators, and introduces safe control‑flow operators (`ternary`, `nullish coalescing`, `optional chaining`). Finally, it shows how to compose more powerful types using unions and intersections.
 
-## Summary
 
-In this guide you’ll discover how to:
-- Differentiate between primitive and composite data types  
-- Unpack values via array and object destructuring  
-- Declare functions with defaults, arrow syntax, and methods  
-- Handle uncertain values using `nullable`, `unknown`, and `never`  
-- Model objects robustly with type aliases, `readonly`, and optional fields  
-- Use spread and rest operators for merging data and parameters  
-- Apply concise control‑flow operators (`?:`, `??`, `?.`)  
-- Create reusable function and object type aliases  
-- Combine types flexibly through union and intersection constructs
 
