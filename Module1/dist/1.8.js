@@ -14,7 +14,7 @@
     var 
     //contactNo: string,
     //when we are going to destructure this thing we cannot specify its type here, 
-    //simply we can allias here, that means
+    //simply we can alias here, that means
     phoneNum = user_1.contactNo, fName = user_1.name.firstName;
     //Array Destructuring
     var myFriends = ['Gopu', 'Samir', 'Tanvir', 'Mithun', 'Chonu'];
