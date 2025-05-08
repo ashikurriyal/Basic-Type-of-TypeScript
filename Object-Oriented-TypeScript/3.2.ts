@@ -1,5 +1,5 @@
 {
-    //Inheritance
+    //Inheritance => 1st piller of OOP
 
 
 

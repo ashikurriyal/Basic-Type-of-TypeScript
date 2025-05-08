@@ -1,9 +1,9 @@
 {
-  //Polymorphism
+  //Polymorphism => 2nd piller of OOP
   //If a particular method of a class redesign in a another class and gets different different outputs, its called polymorphism
   //Same method giving me different different outputs on tha based on different situations
 
-  
+
   class Person {
     getSleep() {
       console.log(`I am sleeping for 8 hours per day`);
