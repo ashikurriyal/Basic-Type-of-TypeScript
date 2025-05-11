@@ -93,3 +93,58 @@ Take your TypeScript skills to the next level with advanced type techniques:
 
 ---
 
+
+## Type Assertion & Type Narrowing in TypeScript
+
+TypeScript sometimes cannot determine the exact type of a variable, especially when using `any` or union types like `string | number`. In such cases, **type assertion** and **type narrowing** help guide TypeScript's type system for safer, more accurate code.
+
+---
+
+
+### Summary
+
+- **Type Assertion** (`as`) tells TypeScript what type a variable should be treated as.
+- **Type Narrowing** uses conditions like `typeof` to let TypeScript infer more specific types.
+- These techniques help make TypeScript code more type-safe and error-resistant, especially when dealing with flexible or uncertain input values.
+
+---
+
+## Interface vs Type in TypeScript
+
+TypeScript gives you two powerful tools to define custom types: `type` aliases and `interface`. While they may appear similar, each has unique strengths.
+
+This section explores the differences, similarities, and best use cases—with practical examples.
+
+---
+
+
+### Summary: Type vs Interface
+
+| Feature                 | `type`                           | `interface`                   |
+| ----------------------- | -------------------------------- | ----------------------------- |
+| Object type definition  | ✅ Yes                           | ✅ Yes                        |
+| Extend another type     | ✅ Via intersection (`&`)        | ✅ Via `extends`              |
+| Implements (with class) | ✅ Yes                           | ✅ Yes                        |
+| Use for primitives      | ✅ Yes                           | ❌ No                         |
+| Declaration merging     | ❌ No                            | ✅ Yes                        |
+| Preferred for objects   | ✔ When using unions & primitives | ✔ When defining API contracts |
+
+---
+
+📌 **Rule of Thumb**
+
+- Use `interface` for defining object shapes, especially when working with classes or APIs.
+- Use `type` for primitives, union types, intersections, or when you need more flexibility.
+
+---
+
+## Introduction to Generics in TypeScript
+
+Generics are a powerful feature in TypeScript that allow you to create reusable components or functions that work with any data type, while still maintaining type safety.
+
+They are especially useful when building libraries, utility functions, or working with collections of data.
+
+---
+
+
+
