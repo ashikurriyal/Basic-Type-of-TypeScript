@@ -36,7 +36,7 @@ ts-node-dev --respawn --transpile-only src/index.ts
 
 ---
 
-## TypeScript Essentials Overview
+## Basic-Types-of-TypeScript Overview
 
 This guide walks you through the core of TypeScript, starting with primitive and non‑primitive data types, then showing how to destructure arrays and objects. You’ll see how to write functions with default parameters, arrow syntax, and object methods, and learn about special types like `nullable`, `unknown`, and `never`. Moving on, it covers object modeling with type aliases, `readonly` and optional properties, demonstrates spread/rest operators, and introduces safe control‑flow operators (`ternary`, `nullish coalescing`, `optional chaining`). Finally, it shows how to compose more powerful types using unions and intersections.
 
@@ -52,4 +52,44 @@ In this guide you’ll discover how to:
 - Apply concise control‑flow operators (`?:`, `??`, `?.`)  
 - Create reusable function and object type aliases  
 - Combine types flexibly through union and intersection constructs
+
+
+## Advanced-Types-of-TypeScript-Overview
+
+Take your TypeScript skills to the next level with advanced type techniques:
+
+1. **Type Assertion & Type Narrowing**
+   Guide TypeScript when it's unsure about a variable’s type. Use type assertions and refine types for safety and accuracy.
+
+2. **Interfaces: `type` vs `interface`**
+   Understand the difference and best use cases for `type` aliases and `interface` structures.
+
+3. **Introduction to Generics**
+   Create reusable code components that work across different types with TypeScript generics.
+
+4. **Generics with Interfaces**
+   Use generics inside interfaces to make strongly typed, reusable components and APIs.
+
+5. **Functions with Generics**
+   Write flexible, type-safe functions that can accept multiple types with ease.
+
+6. **Constraints in Generics**
+   Limit which types a generic can accept, ensuring more predictable and robust code.
+
+7. **Constraints Using `keyof`**
+   Leverage `keyof` to restrict generics to known object properties.
+
+8. **Asynchronous TypeScript**
+   Use TypeScript's type system to safely handle asynchronous code and promises.
+
+9. **Conditional Types**
+   Build dynamic types that adapt based on input conditions.
+
+10. **Mapped Types**
+    Transform existing types into new ones by iterating over keys with mapped types.
+
+11. **Utility Types**
+    Simplify code with TypeScript’s built-in utility types like `Partial`, `Pick`, `Record`, `Required`, and more.
+
+---
 
