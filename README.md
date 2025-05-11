@@ -146,5 +146,95 @@ They are especially useful when building libraries, utility functions, or workin
 
 ---
 
+### Generic Arrays
+
+A common use of generics is to define arrays that can hold any type of data, while ensuring type safety.
+
+```ts
+type GenericArray<T> = Array<T>;
+```
+**Why Use Generic Arrays?**
+
+- Reusability: Define once, use with many types.
+- Type Safety: Prevents accidental type mismatches.
+- Clean Syntax: Improves readability for complex data structures.
+
+---
+
+### Generic Tuples
+
+Tuples are fixed-length arrays where each position can hold a different type. We can also make them generic!
+
+```ts
+type GenericTuple<X, Y> = [X, Y];
+```
+
+**Why Use Generic Tuples?**
+
+- Strong typing for structured pairs.
+- Useful for key-value pairs, ID-object relationships, and more.
+- Great for returning multiple values from a function.
+
+---
+
+### When to Use Generics
+
+| Use Case                             | Why Use Generics?                      |
+| ------------------------------------ | -------------------------------------- |
+| Reusable Array/Collection Structures | Type-safe and flexible                 |
+| Functions That Accept Many Types     | Enforce input/output types dynamically |
+| Utility Libraries                    | Generic utilities work for all types   |
+| API Response Wrappers                | Flexible return data models            |
+
+---
+
+### Summary
+
+- Generics make your code **reusable, scalable, and type-safe**.
+- Use generic arrays like `GenericArray<T>` for consistent handling of different types.
+- Use generic tuples to strongly type fixed-length, mixed-type values.
+- TypeScript generics help you write better, cleaner, and safer code.
+
+---
+
+## Generics with Interfaces in TypeScript
+
+In TypeScript, interfaces can be combined with **generics** to build flexible, reusable, and strongly-typed data structures. This is especially useful when the shape of certain properties (like devices or tools a user uses) may vary.
+
+---
+
+### Why Use Generics with Interfaces?
+
+| Benefit      | Description                                                    |
+| ------------ | -------------------------------------------------------------- |
+| Reusability  | Define once, use with multiple types.                          |
+| Flexibility  | Swap out smartwatch or bike types easily using generics.       |
+| Type Safety  | Prevent incorrect data structure at compile time.              |
+| Cleaner Code | Avoids redundant interfaces and promotes consistent structure. |
+
+---
+
+### Summary
+
+- Generics + Interfaces allow for flexible, strongly-typed models.
+- Useful for designing reusable blueprints where some parts vary.
+- Helps reduce duplication and ensures correctness across use cases.
+
+---
+
+## Functions with Generics
+
+Generics in functions allow you to write **reusable and type-safe code** that works with multiple data types. This is extremely useful when you want to create flexible utilities that maintain type consistency.
+
+---
+
+### Why Use Generics?
+
+- Reusability: Define a single function for multiple types.
+- Type Safety: Maintains proper type relationships across parameters and return values.
+- Improved Developer Experience: Offers better autocompletion and compile-time checks.
+- Scalable Design: Ideal for library and API development.
+
+---
 
 
