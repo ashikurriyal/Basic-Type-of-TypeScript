@@ -238,3 +238,72 @@ Generics in functions allow you to write **reusable and type-safe code** that wo
 ---
 
 
+## Constraints in TypeScript
+
+When using **generics** in TypeScript, you may want to ensure that the generic type has a specific shape or structure. This is where **constraints** come into play. You can use `extends` to restrict what kinds of values are allowed as type arguments.
+
+---
+
+### Example: Enforcing Structure with Constraints
+
+Let's consider a scenario where we want to add a course to a student object. We need to ensure that the student object contains at least `id`, `name`, and `email`.
+
+```ts
+const addCourseToStudent = <
+  T extends { id: number; name: string; email: string }
+>(
+  student: T
+) => {
+  const course = "Next Level Web Development";
+  return {
+    ...student,
+    course,
+  };
+};
+```
+
+### How It Works:
+
+- `T extends { id: number; name: string; email: string }>` ensures the object passed **must include at least** these three properties.
+- This keeps the function flexible (it can take extra properties too) but **type-safe**.
+
+---
+
+### Why Use Constraints?
+
+- ✅ Enforce minimum required structure on generic types.
+- ✅ Maintain type safety with flexibility for additional properties.
+- ✅ Ideal for utility functions, form validators, API responses, etc.
+
+---
+
+## Constraint Using `keyof`
+
+In TypeScript, the `keyof` operator is a powerful tool that allows you to create types based on the keys of an object. It is especially useful when working with **generic functions** where you want to ensure a parameter corresponds to a valid property name of a given object.
+
+---
+
+## Constraint Using `keyof`
+
+In TypeScript, the `keyof` operator is a powerful tool that allows you to create types based on the keys of an object. It is especially useful when working with **generic functions** where you want to ensure a parameter corresponds to a valid property name of a given object.
+
+---
+
+### Why Use `keyof` With Constraints?
+
+- ✅ Ensures the provided key actually exists on the object.
+- ✅ Enables fully type-safe access to object properties.
+- ✅ Makes generic utility functions more robust and reusable.
+
+---
+
+This pattern is particularly useful in form handling, dynamic property lookups, building libraries, or anywhere dynamic object access is required with type safety.
+
+---
+
+## Asynchronous TypeScript
+
+Asynchronous programming is crucial in modern web development, especially when dealing with tasks like API calls, file reading, or timers. TypeScript fully supports asynchronous operations using `Promises` and `async/await` syntax — allowing you to write clean, readable, and type-safe asynchronous code.
+
+---
+
