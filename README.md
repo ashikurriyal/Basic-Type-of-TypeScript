@@ -569,7 +569,7 @@ type TPerson = {
 type TName = Pick<TPerson, "name">; // { name: string }
 type TNameAge = Pick<TPerson, "name" | "age">; // { name: string; age: number }
 
-const nameOnly: TName = { name: "Monjur" };
+const nameOnly: TName = { name: "Riyal" };
 ```
 
 ---
@@ -603,9 +603,9 @@ type TPerson = {
 type TRequiredPerson = Required<TPerson>;
 
 const person: TRequiredPerson = {
-  name: "Monjur",
-  age: 23,
-  email: "monjur@example.com",
+  name: "Riyal",
+  age: 25,
+  email: "riyal@gmail.com",
   contactNo: "1234567890",
 };
 ```
@@ -620,7 +620,7 @@ Makes all properties **optional**.
 type TPartialPerson = Partial<TPerson>;
 
 const partialPerson: TPartialPerson = {
-  name: "Monjur",
+  name: "Riyal",
 };
 ```
 
@@ -634,9 +634,9 @@ Makes all properties **immutable** (read-only).
 type TReadonlyPerson = Readonly<TPerson>;
 
 const readonlyPerson: TReadonlyPerson = {
-  name: "Monjur",
-  age: 23,
-  email: "monjur@example.com",
+  name: "Riyal",
+  age: 25,
+  email: "riyal@example.com",
   contactNo: "1234567890",
 };
 
@@ -659,7 +659,7 @@ const myObj: TMyObj = {
 };
 
 const anyObj: Record<string, unknown> = {
-  name: "Monjur",
+  name: "Riyal",
   age: 23,
   isAdmin: true,
 };
@@ -835,13 +835,13 @@ const getUser = (user: TNormalUser | TAdminUser) => {
 #### Testing the Function
 
 ```ts
-const normalUser: TNormalUser = { name: "Rakib" };
+const normalUser: TNormalUser = { name: "Riyal" };
 getUser(normalUser);
-// ➜ Output: My name is Rakib
+// ➜ Output: My name is Riyal
 
-const adminUser: TAdminUser = { name: "Sakib", role: "admin" };
+const adminUser: TAdminUser = { name: "Riyal", role: "admin" };
 getUser(adminUser);
-// ➜ Output: My name is Sakib and my role is admin
+// ➜ Output: My name is Riyal and my role is admin
 ```
 
 ---
@@ -1035,5 +1035,110 @@ In TypeScript, **getters** and **setters** are special methods used to access an
 - **Getter**: A getter allows you to retrieve the value of a property. It's defined using the `get` keyword and provides a **read-only** way to access private or protected class properties.
 
 - **Setter**: A setter allows you to modify the value of a property. It's defined using the `set` keyword and provides a **controlled** way to update private or protected class properties.
+
+---
+### Benefits of Using Getters and Setters:
+
+1. **Encapsulation**: You can control how the internal properties of the class are accessed and modified, keeping them hidden from direct manipulation.
+2. **Validation**: With setters, you can ensure that only valid data is being set (e.g., validating deposit amounts).
+3. **Read-only Access**: Using getters, you can give users read-only access to internal data, like a balance, without allowing them to modify it.
+4. **Custom Logic**: You can add logic to getters and setters, such as triggering events when a value changes, or performing calculations when retrieving a value.
+
+---
+
+### Summary
+
+- **Getters** provide a way to access private/protected properties with custom logic and without allowing direct manipulation of those properties.
+- **Setters** enable controlled modification of private/protected properties, allowing you to enforce rules (like validation) before updating a value.
+- They are an essential feature of **encapsulation** in object-oriented programming, helping you maintain **data integrity** and provide cleaner, more maintainable code.
+
+---
+
+## Static Members in Object-Oriented Programming (OOP)
+
+In TypeScript, **static properties** and **static methods** are associated with the **class itself** rather than with individual instances of the class. Static members can be used to store data or behavior that should be shared across all instances of the class. This is useful when you need to track shared state, or when certain functionality does not require instance-specific data.
+
+### Key Concepts:
+
+- **Static Properties**: Shared across all instances of the class. They are accessed using the class name, not via an instance.
+- **Static Methods**: Methods that belong to the class itself, and not to any individual instance. They are invoked directly on the class.
+
+#### Why Use Static Members?
+
+- Static properties are useful for **shared data** or **state** that is not tied to a particular instance.
+- Static methods can implement **utility functions** or **helper functions** that don’t require an instance to be useful (e.g., logging, configuration, or calculation methods).
+
+---
+
+### Conclusion
+
+Static members are a powerful feature in object-oriented programming in TypeScript. They allow you to share data or behavior across all instances of a class without needing to instantiate the class multiple times. Whether you're dealing with a shared counter, utility methods, or configurations, static members provide a clean and efficient way to handle common functionality.
+
+---
+
+## Polymorphism in TypeScript
+
+Polymorphism is a powerful concept in Object-Oriented Programming (OOP) that allows objects of different types to be treated as instances of the same base type. In TypeScript, this is commonly achieved through class inheritance and method overriding.
+
+### Why Use Polymorphism?
+
+- Promotes **code reusability** and **flexibility**.
+- Allows **dynamic behavior** at runtime.
+- Makes code **easier to maintain** and **extend**.
+
+---
+
+## Abstraction in Object-Oriented TypeScript
+
+Abstraction is one of the core pillars of Object-Oriented Programming (OOP). It allows us to **hide the complex implementation details** and expose only the **necessary parts of an object**. TypeScript supports abstraction through two main constructs:
+
+- **Interfaces**
+- **Abstract Classes**
+
+Both of these allow developers to define a contract or blueprint for classes, ensuring consistency while promoting flexibility and maintainability.
+
+---
+
+### Key Differences: Interface vs Abstract Class
+
+| Feature                   | Interface                  | Abstract Class                 |
+| ------------------------- | -------------------------- | ------------------------------ |
+| Can have implementations? | ❌ No                      | ✅ Yes                         |
+| Multiple inheritance      | ✅ Yes                     | ❌ No                          |
+| Flexibility               | More flexible              | More structured                |
+| Usage purpose             | Define capability/contract | Provide partial implementation |
+
+---
+
+### Use Abstraction When:
+
+- You want to enforce a **consistent structure** across different classes.
+- You want to **separate concerns** — consumers should not care about implementation.
+- You want to **minimize code duplication** via base class logic.
+
+---
+
+## Encapsulation in TypeScript (OOP)
+
+Encapsulation is one of the fundamental principles of Object-Oriented Programming (OOP). It is the process of bundling data (properties) and methods (functions) that operate on the data into a single unit (class), and **restricting direct access** to some of the object's components. This helps in protecting the internal state of an object from unintended or harmful changes.
+
+---
+### Benefits of Encapsulation
+
+| Benefit             | Explanation                                                  |
+| ------------------- | ------------------------------------------------------------ |
+| **Security**        | Private/protected properties can't be modified from outside. |
+| **Control**         | Changes to internal state go through controlled methods.     |
+| **Abstraction**     | Hide unnecessary details from outside the class.             |
+| **Maintainability** | Makes it easier to update and debug.                         |
+
+---
+
+### Recap
+
+- `private` ⇒ only accessible within the same class
+- `protected` ⇒ accessible within the class and its subclasses
+- `public` ⇒ accessible from anywhere
+- `readonly` ⇒ can be set once during construction, then becomes immutable
 
 ---
