@@ -307,3 +307,377 @@ Asynchronous programming is crucial in modern web development, especially when d
 
 ---
 
+### 1. **Basic Promise Example with `boolean`**
+
+```ts
+const createPromise1 = (): Promise<boolean> => {
+  return new Promise<boolean>((resolve, reject) => {
+    const data: boolean = true;
+    if (data) {
+      resolve(data);
+    } else {
+      reject("Failed to load data");
+    }
+  });
+};
+
+const showData1 = async (): Promise<boolean> => {
+  const data: boolean = await createPromise1();
+  console.log("Boolean Promise Result:", data);
+  return data;
+};
+
+showData1();
+```
+
+> ✅ We define a promise that resolves a boolean and consume it using `async/await`.
+
+---
+
+### 2. **Promise with a Custom Object Type**
+
+```ts
+type TSomething = {
+  something: string;
+};
+
+const createPromise2 = (): Promise<TSomething> => {
+  return new Promise<TSomething>((resolve, reject) => {
+    const data: TSomething = { something: "This is something" };
+    if (data) {
+      resolve(data);
+    } else {
+      reject("Failed to load object data");
+    }
+  });
+};
+
+const showData2 = async (): Promise<TSomething> => {
+  const data: TSomething = await createPromise2();
+  console.log("Object Promise Result:", data);
+  return data;
+};
+
+showData2();
+```
+
+> ✅ Promises can return objects by defining a custom type (`TSomething`) and using `Promise<TSomething>`.
+
+---
+
+### 3. **Fetching Data from an API using `fetch`**
+
+```ts
+type TTodo = {
+  id: number;
+  userId: number;
+  title: string;
+  completed: boolean;
+};
+
+const getTodo = async (): Promise<TTodo> => {
+  const response = await fetch("https://jsonplaceholder.typicode.com/todos/1");
+  const data: TTodo = await response.json();
+  console.log("Fetched Todo:", data);
+  return data;
+};
+
+getTodo();
+```
+
+> ✅ You can define the expected response from an API using interfaces or types like `TTodo` to ensure type safety and clarity.
+
+---
+
+### Why Use Async with TypeScript?
+
+- **Type safety**: You always know what data you're dealing with.
+- **Cleaner syntax**: `async/await` avoids the pyramid of doom caused by chained `.then()` calls.
+- **Easy debugging**: Using tools like `console.log` with strongly-typed data makes debugging predictable.
+
+---
+
+## Conditional Types in TypeScript
+
+Conditional types in TypeScript allow you to define types that depend on a condition. This makes TypeScript more flexible and powerful when dealing with types that vary based on some condition.
+
+The syntax for a conditional type looks like this:
+
+```ts
+T extends U ? X : Y
+```
+
+Where:
+
+- `T` is a type that will be checked.
+- `U` is a type that `T` is being compared to.
+- `X` is the type returned if `T` extends `U`.
+- `Y` is the type returned if `T` does not extend `U`.
+
+### Key Benefits
+
+- **Type safety:** Conditional types allow for more granular control over type resolution.
+- **Dynamic typing:** They enable more dynamic behavior based on types.
+- **Code clarity:** Makes complex type logic easier to understand and manage.
+
+## Summary
+
+Conditional types are a powerful feature in TypeScript that allows you to define types that depend on certain conditions, improving the flexibility and safety of your code. By using `extends` and conditional logic, you can create complex type relationships that react dynamically based on the type in question.
+
+### Key Takeaways:
+
+- Conditional types let you create types that change depending on other types.
+- They are useful for more complex type transformations.
+- Using `keyof`, you can dynamically check for keys in an object and resolve types accordingly.
+
+For further reading, you can check out the official TypeScript documentation on [Conditional Types](https://www.typescriptlang.org/docs/).
+
+### Notes:
+
+1. **Conditional Types:** This feature allows TypeScript to choose between different types based on a condition.
+2. **`keyof` Operator:** The `keyof` operator is useful for checking if a type is one of the keys of an object.
+3. **Practical Uses:** You can use conditional types for a variety of tasks like validating keys in an object, transforming types, or making decisions in generic functions.
+
+---
+
+## Mapped Types in TypeScript
+
+Mapped types are a powerful feature in TypeScript that allows you to transform the properties of an existing type into new ones. This can be helpful for scenarios where you need to create types based on the properties of another type or modify the properties of an existing object. In this section, we'll explore how mapped types work, and how to use them with arrays and objects.
+
+---
+
+### 1. **Basic Example of Mapped Types with Arrays**
+
+---
+
+First, let’s look at an example with arrays where we convert elements from one type to another:
+
+```typescript
+const arrOfNumer: number[] = [2, 4, 7];
+const arrOfString1: string[] = ["2", "4", "7"];
+
+// Mapping number array to string array using `map()`
+const arrOfString2: string[] = arrOfNumer.map((number) => number.toString());
+console.log("Array of numbers:", arrOfNumer);
+console.log("Array of strings (initial):", arrOfString1);
+console.log("Array of strings (mapped from numbers):", arrOfString2);
+```
+
+In this example, we start with an array of numbers (`arrOfNumer`) and an array of strings (`arrOfString1`). By using the `map()` function, we create a new array (`arrOfString2`) where each number is converted into a string. This demonstrates how mapped types can help transform an array's elements.
+
+---
+
+### 2. **Mapped Types with Object Types**
+
+---
+
+Mapped types are commonly used with object types as well. Let’s consider the following example where we create a mapped type to convert object properties:
+
+```typescript
+type TAreaNumber = {
+  height: number;
+  width: number;
+};
+
+type TAreaString1 = {
+  height: string;
+  width: string;
+};
+
+// Using a mapped type to convert the properties of TAreaNumber to strings
+type TAreaString2 = {
+  [key in "height" | "width"]: string;
+};
+
+// Using a mapped type with `keyof` operator to make the properties of TAreaNumber into strings
+type TAreaString3 = {
+  [key in keyof TAreaNumber]: string;
+};
+```
+
+In this example:
+
+- `TAreaNumber` is a type with numeric properties `height` and `width`.
+- `TAreaString1` is another type where both properties are strings.
+- `TAreaString2` and `TAreaString3` are mapped types that dynamically map over the keys of `TAreaNumber` and set the property types to `string`.
+
+---
+
+### 3. **Extracting Types with `keyof`**
+
+---
+
+You can also use the `keyof` operator with mapped types to extract specific property types. In the example below:
+
+```typescript
+type THeight = TAreaNumber["height"];
+console.log("Type of height in TAreaNumber:", THeight);
+```
+
+The type `THeight` will be `number`, because it's extracting the type of the `height` property from `TAreaNumber`.
+
+---
+
+### 4. **Mapped Types with Generics**
+
+---
+
+Mapped types can also work with generics to create more flexible types:
+
+```typescript
+type TAreaStringGeneric<T> = {
+  [key in keyof T]: T[key];
+};
+
+const area1: TAreaStringGeneric<{ height: string; width: number }> = {
+  height: "100",
+  width: 500,
+};
+
+console.log("Mapped type area with string height and number width:", area1);
+```
+
+Here, we define a generic mapped type `TAreaStringGeneric`, which takes an object type `T` and maps over its properties, preserving the original types. This provides a flexible way to create types based on any object you pass in.
+
+### Summary
+
+- **Mapped Types**: Enable transformation of types by iterating over keys and modifying their values.
+- **`keyof` Operator**: Can be used to extract specific property types from an object.
+- **Generics**: Allow you to create mapped types that work with any type, providing flexibility and reusability.
+
+Mapped types are incredibly powerful and can be used to manipulate and derive new types based on the properties of other types. By understanding and utilizing mapped types, you can write more dynamic and reusable TypeScript code.
+
+---
+
+# TypeScript Utility Types
+
+TypeScript provides built-in **utility types** that help you transform existing types easily and concisely. Below is an explanation of commonly used utility types along with examples.
+
+---
+
+## 🔹 1. `Pick<Type, Keys>`
+
+Creates a new type by picking a subset of properties from another type.
+
+```ts
+type TPerson = {
+  name: string;
+  age: number;
+  contactNo: string;
+};
+
+type TName = Pick<TPerson, "name">; // { name: string }
+type TNameAge = Pick<TPerson, "name" | "age">; // { name: string; age: number }
+
+const nameOnly: TName = { name: "Monjur" };
+```
+
+---
+
+## 🔹 2. `Omit<Type, Keys>`
+
+Creates a new type by **excluding** certain keys from an existing type.
+
+```ts
+type TContactInfo = Omit<TPerson, "name" | "age">; // { contactNo: string }
+
+const contactInfo: TContactInfo = {
+  contactNo: "1234567890",
+};
+```
+
+---
+
+## 🔹 3. `Required<Type>`
+
+Converts all optional properties of a type to **required**.
+
+```ts
+type TPerson = {
+  name: string;
+  age: number;
+  email?: string;
+  contactNo: string;
+};
+
+type TRequiredPerson = Required<TPerson>;
+
+const person: TRequiredPerson = {
+  name: "Monjur",
+  age: 23,
+  email: "monjur@example.com",
+  contactNo: "1234567890",
+};
+```
+
+---
+
+## 🔹 4. `Partial<Type>`
+
+Makes all properties **optional**.
+
+```ts
+type TPartialPerson = Partial<TPerson>;
+
+const partialPerson: TPartialPerson = {
+  name: "Monjur",
+};
+```
+
+---
+
+## 🔹 5. `Readonly<Type>`
+
+Makes all properties **immutable** (read-only).
+
+```ts
+type TReadonlyPerson = Readonly<TPerson>;
+
+const readonlyPerson: TReadonlyPerson = {
+  name: "Monjur",
+  age: 23,
+  email: "monjur@example.com",
+  contactNo: "1234567890",
+};
+
+// readonlyPerson.name = "Test"; ❌ Error: Cannot assign to 'name' because it is a read-only property
+```
+
+---
+
+## 🔹 6. `Record<Keys, Type>`
+
+Creates an object type with specified keys and value types.
+
+```ts
+type TMyObj = Record<string, string>;
+
+const myObj: TMyObj = {
+  a: "aa",
+  b: "bb",
+  c: "cc",
+};
+
+const anyObj: Record<string, unknown> = {
+  name: "Monjur",
+  age: 23,
+  isAdmin: true,
+};
+```
+
+---
+
+## ✅ Summary Table
+
+| Utility Type   | Description                                               |
+| -------------- | --------------------------------------------------------- |
+| `Pick<T, K>`   | Picks specific properties from a type.                    |
+| `Omit<T, K>`   | Removes specific properties from a type.                  |
+| `Required<T>`  | Makes all properties required.                            |
+| `Partial<T>`   | Makes all properties optional.                            |
+| `Readonly<T>`  | Makes all properties read-only.                           |
+| `Record<K, T>` | Creates an object type with keys of `K` and values of `T` |
+
+---
+
+
