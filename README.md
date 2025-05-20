@@ -680,4 +680,68 @@ const anyObj: Record<string, unknown> = {
 
 ---
 
+## Object-Oriented-Typescript Overview
 
+### Class and Object
+
+Classes serve as blueprints for creating objects, which are instances that encapsulate both state and behavior. You'll learn how to define classes with properties and methods, create objects from them, and understand why this pattern is crucial for building scalable and maintainable applications.
+
+### Inheritance in OOP
+
+Continuing our exploration of OOP, we’ll talk about inheritance, one of the most powerful tools for code reuse. Inheritance allows a class to inherit properties and methods from another class, creating a parent-child relationship.
+
+### Type Guard using `typeof` & `in`
+
+When working with dynamic types, it's crucial to ensure you're dealing with the expected type. TypeScript offers type guards to help with this. You'll explore how to use the `typeof` operator and the `in` keyword to safely implement conditional logic based on variable types.
+
+### Type Guard using `instanceof`
+
+Building on your knowledge of type guards, you'll explore the `instanceof` operator — a powerful tool for checking whether an object is an instance of a specific class, especially useful in class hierarchies.
+
+### Access Modifiers
+
+Access modifiers are key to controlling the visibility of class members. You’ll learn about `public`, `private`, and `protected` in TypeScript, and how they help enforce encapsulation.
+
+### Getter and Setter
+
+Take control of how your class properties are accessed and modified! You'll learn how to define getters and setters in TypeScript and explore their practical benefits.
+
+### Static Members in OOP
+
+Static properties and methods belong to the class itself, not to instances. We'll show you how to declare and use `static` members in TypeScript effectively.
+
+### Polymorphism
+
+Polymorphism allows different classes to be treated as if they are the same through a shared interface or base class. You’ll implement polymorphism and understand its importance in flexible application design.
+
+### Abstraction in OOP
+
+Abstraction hides implementation details and exposes only essential features. You'll learn to create abstract classes and interfaces to define clear and robust contracts in your code.
+
+### Encapsulation in OOP
+
+Encapsulation ensures that internal class details are hidden and protected. We’ll demonstrate how to implement encapsulation using private properties and access modifiers.
+
+---
+
+## Class and Object in TypeScript
+
+In Object-Oriented Programming (OOP), **classes** are blueprints for creating **objects**. Each object created from a class can have its own data (**properties**) and functionality (**methods**).
+
+### Why Use Classes?
+
+- Reuse code by creating multiple instances (objects).
+- Group related data and behaviors.
+- Helps with large-scale, maintainable application design.
+
+---
+
+### Class vs Object Summary
+
+| Feature    | Class                         | Object                                   |
+| ---------- | ----------------------------- | ---------------------------------------- |
+| Definition | A blueprint or template       | An instance of a class                   |
+| Use        | Define structure and behavior | Access or manipulate specific data       |
+| Keyword    | `class`                       | `new ClassName(...)` to create an object |
+
+---
