@@ -745,3 +745,295 @@ In Object-Oriented Programming (OOP), **classes** are blueprints for creating **
 | Keyword    | `class`                       | `new ClassName(...)` to create an object |
 
 ---
+
+
+## Inheritance in TypeScript
+
+**Inheritance** is a core principle of Object-Oriented Programming (OOP) that allows one class to inherit the properties and methods of another. This promotes **code reuse**, **organization**, and **scalability**.
+
+---
+
+### Why Use Inheritance?
+
+- Avoid duplicate code.
+- Express logical relationships (e.g., a Teacher **is a** Person).
+- Make future extensions easier (e.g., add more subclasses like `Admin`, `Guardian`, etc.).
+- Encourage consistency across components.
+
+---
+## Type Guards in TypeScript – `typeof` & `in` Operators
+
+Type guards are a powerful feature in TypeScript that help you **safely handle union types** by checking the **actual type** of a variable at runtime.
+
+This allows you to write safer, more predictable logic and avoid runtime errors.
+
+---
+### Using `typeof` for Primitive Types
+
+The `typeof` operator is used to check the type of **primitive values** like `string`, `number`, `boolean`, etc.
+
+#### Example: Add two values (numbers or strings)
+
+```ts
+type TAlphaNumeric = string | number;
+
+const add = (param1: TAlphaNumeric, param2: TAlphaNumeric): TAlphaNumeric => {
+  // Check if both are numbers
+  if (typeof param1 === "number" && typeof param2 === "number") {
+    return param1 + param2; // Arithmetic addition
+  } else {
+    return param1.toString() + param2.toString(); // String concatenation
+  }
+};
+```
+
+#### Testing the Function
+
+```ts
+console.log(add(10, 20)); // ➜ 30
+console.log(add("10", "20")); // ➜ "1020"
+console.log(add(10, "20")); // ➜ "1020"
+console.log(add("Code", 123)); // ➜ "Code123"
+```
+
+#### What’s Happening?
+
+| Input          | Type Check                | Output      |
+| -------------- | ------------------------- | ----------- |
+| `10 + 20`      | number + number           | `30`        |
+| `"10" + "20"`  | string + string           | `"1020"`    |
+| `10 + "20"`    | number + string ➜ convert | `"1020"`    |
+| `"Code" + 123` | string + number ➜ convert | `"Code123"` |
+
+---
+
+### Using `in` for Object Type Guards
+
+The `in` operator is used to check if a **property exists** in an object, making it very useful for narrowing **union types of object shapes**.
+
+#### Example: Distinguishing Between Normal and Admin Users
+
+```ts
+type TNormalUser = {
+  name: string;
+};
+
+type TAdminUser = {
+  name: string;
+  role: "admin";
+};
+
+const getUser = (user: TNormalUser | TAdminUser) => {
+  if ("role" in user) {
+    console.log(`My name is ${user.name} and my role is ${user.role}`);
+  } else {
+    console.log(`My name is ${user.name}`);
+  }
+};
+```
+
+#### Testing the Function
+
+```ts
+const normalUser: TNormalUser = { name: "Rakib" };
+getUser(normalUser);
+// ➜ Output: My name is Rakib
+
+const adminUser: TAdminUser = { name: "Sakib", role: "admin" };
+getUser(adminUser);
+// ➜ Output: My name is Sakib and my role is admin
+```
+
+---
+
+### Summary Table
+
+| Operator | Use Case                                | Checks For               |
+| -------- | --------------------------------------- | ------------------------ |
+| `typeof` | Primitive types like `number`, `string` | `typeof value === "..."` |
+| `in`     | Object shapes / keys                    | `"key" in object`        |
+
+---
+### Why Use Type Guards?
+
+- Helps safely handle complex types.
+- Avoids unnecessary type casting.
+- Prevents runtime errors.
+- Improves code clarity and readability.
+
+---
+
+## Type Guards in TypeScript – `instanceof`
+
+When working with **class-based object types**, TypeScript allows us to use the `instanceof` operator to narrow down types at runtime. This is especially useful in **object-oriented programming**, where instances might come from a class hierarchy.
+
+---
+
+### What is `instanceof`?
+
+The `instanceof` operator checks whether an object is an **instance of a specific class** (or one of its subclasses).
+It is used to apply logic based on the **actual class** of the object at runtime.
+
+---
+
+### Example: Detecting Class Instances
+
+Let’s define a base class `Animal` and two subclasses: `Dog` and `Cat`.
+
+```ts
+class Animal {
+  name: string;
+  species: string;
+
+  constructor(name: string, species: string) {
+    this.name = name;
+    this.species = species;
+  }
+
+  makeSound() {
+    console.log(`${this.name} is making a generic animal sound`);
+  }
+}
+
+class Dog extends Animal {
+  makeBark() {
+    console.log(`${this.name} is barking: "Woof! Woof!"`);
+  }
+}
+
+class Cat extends Animal {
+  makeMeaw() {
+    console.log(`${this.name} is meowing: "Meow~"`);
+  }
+}
+```
+
+---
+
+### Creating Objects
+
+```ts
+const dog = new Dog("Dog Vai", "Dog");
+const cat = new Cat("Cat Vai", "Cat");
+const rabbit = new Animal("Rabbit Vai", "Rabbit");
+```
+
+---
+
+### Using `instanceof` Directly
+
+```ts
+const getAnimal1 = (animal: Animal) => {
+  if (animal instanceof Dog) {
+    console.log(" It's a Dog!");
+    animal.makeBark();
+  } else if (animal instanceof Cat) {
+    console.log(" It's a Cat!");
+    animal.makeMeaw();
+  } else {
+    console.log(" Unknown Animal Type");
+    animal.makeSound();
+  }
+};
+
+getAnimal1(dog); // Dog Vai is barking: "Woof! Woof!"
+getAnimal1(cat); // Cat Vai is meowing: "Meow~"
+getAnimal1(rabbit); // Rabbit Vai is making a generic animal sound
+```
+
+---
+
+### Cleaner: Type Guard Functions (Predicates)
+
+To improve readability and reusability, you can define **custom type guard functions**.
+
+```ts
+const isDog = (animal: Animal): animal is Dog => {
+  return animal instanceof Dog;
+};
+
+const isCat = (animal: Animal): animal is Cat => {
+  return animal instanceof Cat;
+};
+```
+
+Now use them in logic:
+
+```ts
+const getAnimal2 = (animal: Animal) => {
+  if (isDog(animal)) {
+    console.log(" Detected a Dog using predicate.");
+    animal.makeBark();
+  } else if (isCat(animal)) {
+    console.log(" Detected a Cat using predicate.");
+    animal.makeMeaw();
+  } else {
+    console.log(" Detected unknown animal. Using fallback.");
+    animal.makeSound();
+  }
+};
+
+getAnimal2(dog);
+getAnimal2(cat);
+getAnimal2(rabbit);
+```
+
+---
+
+### Benefits of `instanceof`
+
+| Advantage                    | Description                                  |
+| ---------------------------- | -------------------------------------------- |
+| Runtime type detection       | Safe checks for real class type at runtime   |
+| OOP-friendly                 | Works naturally with class inheritance       |
+| Cleaner code with predicates | Improves separation of logic and reusability |
+
+---
+
+### Summary
+
+- Use `instanceof` when working with **class-based types**.
+- It helps determine the **actual class** of an object from a union of base types.
+- Combine `instanceof` with **custom type guards** (`animal is Dog`) for clean and type-safe code.
+
+---
+
+## Access Modifiers in TypeScript
+
+Access modifiers are used in TypeScript to control the **visibility** of class members (properties and methods). This helps achieve **encapsulation**, a fundamental principle of Object-Oriented Programming (OOP).
+
+---
+
+### Available Access Modifiers
+
+| Modifier    | Accessibility                                  |
+| ----------- | ---------------------------------------------- |
+| `public`    | Accessible from anywhere (default)             |
+| `private`   | Accessible **only inside the class**           |
+| `protected` | Accessible **inside the class and subclasses** |
+| `readonly`  | Can be read publicly but **not reassigned**    |
+
+---
+
+### Summary
+
+- Use `public` for properties/methods that should be open to the outside world.
+- Use `private` to **hide internal details** and avoid unwanted access.
+- Use `protected` when subclasses need internal access.
+- Use `readonly` to make a value constant after initialization.
+
+---
+
+## Getters and Setters in TypeScript
+
+In TypeScript, **getters** and **setters** are special methods used to access and modify the properties of a class. They provide a clean way to **encapsulate** logic and control how the properties are retrieved and updated.
+
+---
+
+### What are Getters and Setters?
+
+- **Getter**: A getter allows you to retrieve the value of a property. It's defined using the `get` keyword and provides a **read-only** way to access private or protected class properties.
+
+- **Setter**: A setter allows you to modify the value of a property. It's defined using the `set` keyword and provides a **controlled** way to update private or protected class properties.
+
+---
